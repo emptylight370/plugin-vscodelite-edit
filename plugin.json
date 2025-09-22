@@ -1,8 +1,8 @@
 {
-  "name": "plugin-sample",
-  "author": "Vanessa",
-  "url": "https://github.com/siyuan-note/plugin-sample",
-  "version": "0.4.2",
+  "name": "plugin-vscodelite-edit",
+  "author": "Emptylight",
+  "url": "https://github.com/emptylight370/plugin-vscodelite-edit",
+  "version": "0.0.1",
   "minAppVersion": "3.3.0",
   "backends": [
     "windows",
@@ -20,14 +20,13 @@
     "browser-mobile",
     "desktop-window"
   ],
-  "disabledInPublish": false,
+  "disabledInPublish": true,
   "displayName": {
-    "default": "Plugin Sample",
-    "zh_CN": "插件示例"
+    "default": "VSCode Lite Edit"
   },
   "description": {
-    "default": "This is a plugin sample",
-    "zh_CN": "这是一个插件示例"
+    "default": "This is a plugin build for theme VSCode Lite Edit",
+    "zh_CN": "这是一个为主题VSCode Lite Edit构建的插件"
   },
   "readme": {
     "default": "README.md",
@@ -38,11 +37,18 @@
     "patreon": "",
     "github": "",
     "custom": [
-      "https://ld246.com/sponsor"
+      "https://afdian.com/a/tingyuting"
     ]
   },
   "keywords": [
-    "sample",
-    "示例"
+    "vscode",
+    "vscodelite",
+    "vscode lite",
+    "VSCE",
+    "VSCE主题",
+    "light",
+    "dark",
+    "emptylight",
+    "emptylight370"
   ]
 }
