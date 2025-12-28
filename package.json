@@ -10,11 +10,7 @@
     "build": "webpack --mode production",
     "clean": "rimraf dist package.zip"
   },
-  "volta": {
-    "node": "24.12.0",
-    "pnpm": "10.26.1"
-  },
-  "packageManager": "pnpm@10.26.1",
+  "packageManager": "pnpm@10.26.2",
   "keywords": [],
   "author": "Emptylight",
   "license": "MIT",

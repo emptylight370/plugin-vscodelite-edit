@@ -2,7 +2,8 @@ name: package
 
 on:
   push:
-    paths: 'plugin.json'
+    paths: plugin.json
+    branches: main
   workflow_dispatch:
 
 jobs:
