@@ -70,14 +70,15 @@ export default class PluginSample extends Plugin {
         console.log(detail);
         const blockElements = detail.blockElements;
         console.log(blockElements);
-        let menu: Menu = detail.menu;
+        const menu: Menu = detail.menu;
         let submenu: IMenu[] = [];
         if (blockElements.length === 1) {
             // 可以删除属性
-            submenu = await this.selectSingleBlock(blockElements);
+            submenu = await this.selectSingleBlock(blockElements[0]);
             showMessage('VSCE:修改单个块');
         } else if (blockElements.length <= 0) {
             // 返回
+            console.warn('VSCE:在选中0个块的情况下触发了选中块菜单事件');
             return;
         } else {
             // 不可以删除属性
@@ -97,17 +98,17 @@ export default class PluginSample extends Plugin {
      * @param blockElements 选中的块
      * @returns 生成的操作菜单
      */
-    private async selectSingleBlock(blockElements: HTMLElement[]) {
-        let submenu: IMenu[] = [];
+    private async selectSingleBlock(blockElement: HTMLElement) {
+        const submenu: IMenu[] = [];
         // 数据库
-        if (blockElements[0].dataset.type === 'NodeAttributeView') {
+        if (blockElement.dataset.type === 'NodeAttributeView') {
             submenu.push({
                 label: this.i18n.addAVAttributeLabel,
                 click: () => {},
             });
         }
         // 表格
-        else if (blockElements[0].dataset.type === 'NodeTable') {
+        else if (blockElement.dataset.type === 'NodeTable') {
             submenu.push({
                 label: this.i18n.a,
                 click: () => {},
