@@ -36,7 +36,11 @@ export default class PluginSample extends Plugin {
     private isMobile: boolean;
     onload() {
         const frontEnd = getFrontend();
-        this.isMobile = frontEnd === 'mobile' || frontEnd === 'browser-mobile';
+        const backEnd = getBackend();
+        // 在前端和后端都是移动端时认定为移动端
+        this.isMobile =
+            (frontEnd === 'mobile' || frontEnd === 'browser-mobile') &&
+            (backEnd === 'android' || backEnd === 'ios' || backEnd === 'harmony');
 
         this.eventBus.on('click-blockicon', this.handleBlockSelect.bind(this));
 
