@@ -3,7 +3,6 @@
   "printWidth": 120,
   "bracketSameLine": true,
   "singleQuote": true,
-  "plugins": ["prettier-plugin-toml"],
   "overrides": [
     {
       "files": ["*.scss", "*.css"],
