@@ -26,17 +26,18 @@ jobs:
         run: pnpm i
 
       - name: Get current version
-        uses: sergeysova/jq-action@v2
+        uses: flex-development/jq-action@main
         id: version
         with:
-          cmd: 'jq -r ".version" plugin.json'
+          data: plugin.json
+          filter: .version
 
       - name: Package
         run: pnpm build
 
       - name: Generate release log
         run: |
-          conventional-changelog -o release.md -n conventional-changelog.config.json -k theme.json -c theme.json
+          conventional-changelog -o release.md -n changelog.json -k plugin.json -c plugin.json
           npx prettier -w release.md
 
       - name: Release
