@@ -39,3 +39,16 @@ export async function isCapableToVersion(version: string) {
         return false;
     }
 }
+
+/**
+ * 获取当前使用的主题是否是VSCE主题
+ * @returns 是否是VSCE主题
+ */
+export function isUsingVSCE() {
+    const themeMode = document.documentElement.dataset.themeMode;
+    let theme = '';
+    if (themeMode === 'light') theme = document.documentElement.dataset.lightTheme;
+    else if (themeMode === 'dark') theme = document.documentElement.dataset.darkTheme;
+    if (theme === 'siyuan-vscodelite-edit') return true;
+    else return false;
+}

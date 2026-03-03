@@ -31,6 +31,7 @@ import {
 import { IMenu, IMenuBaseDetail } from 'siyuan/types';
 import './index.scss';
 import { IClickBlockIconEventDetail } from './types/types';
+import { isUsingVSCE } from './utils';
 
 export default class PluginSample extends Plugin {
     private isMobile: boolean;
@@ -42,9 +43,12 @@ export default class PluginSample extends Plugin {
             (frontEnd === 'mobile' || frontEnd === 'browser-mobile') &&
             (backEnd === 'android' || backEnd === 'ios' || backEnd === 'harmony');
 
-        this.eventBus.on('click-blockicon', this.handleBlockSelect.bind(this));
-
-        console.log(this.i18n.helloPlugin);
+        if (isUsingVSCE) {
+            this.eventBus.on('click-blockicon', this.handleBlockSelect.bind(this));
+            console.log(this.i18n.initWithVSCE);
+        } else {
+            console.log(this.i18n.initWithoutVSCE);
+        }
     }
 
     onLayoutReady() {
@@ -83,6 +87,7 @@ export default class PluginSample extends Plugin {
         } else {
             // 不可以删除属性
             showMessage('VSCE:暂不支持同时操作多个块');
+            return;
         }
         if (submenu.length > 0) {
             menu.addItem({
@@ -103,14 +108,35 @@ export default class PluginSample extends Plugin {
         // 数据库
         if (blockElement.dataset.type === 'NodeAttributeView') {
             submenu.push({
-                label: this.i18n.addAVAttributeLabel,
+                label: this.i18n.addAVNoAddEntry,
+                click: () => {},
+            });
+            submenu.push({
+                label: this.i18n.addAVNoAddView,
                 click: () => {},
             });
         }
         // 表格
         else if (blockElement.dataset.type === 'NodeTable') {
             submenu.push({
-                label: this.i18n.a,
+                label: this.i18n.addTableMinWidth,
+                click: () => {},
+            });
+            submenu.push({
+                label: this.i18n.addTableNoThead,
+                click: () => {},
+            });
+            submenu.push({
+                label: this.i18n.addTableHideThead,
+                click: () => {},
+            });
+        } else if (blockElement.dataset.type === 'NodeParagraph' || blockElement.dataset.docType === 'NodeDocument') {
+            submenu.push({
+                label: this.i18n.addNoTagStyle,
+                click: () => {},
+            });
+            submenu.push({
+                label: this.i18n.addMarkHide,
                 click: () => {},
             });
         }
