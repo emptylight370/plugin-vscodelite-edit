@@ -69,7 +69,7 @@ export default class PluginSample extends Plugin {
      * 处理选中块菜单事件
      * @param event 选中块菜单事件
      */
-    private async handleBlockSelect(event: CustomEvent<IMenuBaseDetail>) {
+    private handleBlockSelect(event: CustomEvent<IMenuBaseDetail>) {
         const detail = event.detail as unknown as IClickBlockIconEventDetail;
         console.log(detail);
         const blockElements = detail.blockElements;
@@ -78,7 +78,7 @@ export default class PluginSample extends Plugin {
         let submenu: IMenu[] = [];
         if (blockElements.length === 1) {
             // 可以删除属性
-            submenu = await this.selectSingleBlock(blockElements[0]);
+            submenu = this.selectSingleBlock(blockElements[0]);
             showMessage('VSCE:修改单个块');
         } else if (blockElements.length <= 0) {
             // 返回
@@ -91,7 +91,7 @@ export default class PluginSample extends Plugin {
         }
         if (submenu.length > 0) {
             menu.addItem({
-                icon: '',
+                icon: 'iconTheme',
                 label: this.i18n.menuLabel,
                 submenu: submenu,
             });
@@ -103,7 +103,7 @@ export default class PluginSample extends Plugin {
      * @param blockElements 选中的块
      * @returns 生成的操作菜单
      */
-    private async selectSingleBlock(blockElement: HTMLElement) {
+    private selectSingleBlock(blockElement: HTMLElement) {
         const submenu: IMenu[] = [];
         // 数据库
         if (blockElement.dataset.type === 'NodeAttributeView') {

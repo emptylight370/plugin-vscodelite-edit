@@ -12,11 +12,13 @@
   "removeSpace": "Remove Space",
   "initWithVSCE": "Plugin VSCE loaded, work with theme VSCE",
   "initWithoutVSCE": "Plugin VSCE loaded, stop running without using theme VSCE",
+  "menuLabel": "VSCode Lite Edit",
   "getFileError": "Read file error",
   "addAVNoAddEntry": "Hide add entry button",
   "addAVNoAddView": "Hide add view button",
   "addTableMinWidth": "Minimize the width of table column",
   "addTableNoThead": "Remove theme style of thead",
   "addTableHideThead": "Hide thead",
+  "addNoTagStyle": "Disable theme tag style",
   "addMarkHide": "Mark Cloze"
 }
