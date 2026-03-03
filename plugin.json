@@ -5,20 +5,10 @@
   "version": "0.0.1",
   "minAppVersion": "3.3.0",
   "backends": [
-    "windows",
-    "linux",
-    "darwin",
-    "ios",
-    "android",
-    "harmony",
-    "docker"
+    "all"
   ],
   "frontends": [
-    "desktop",
-    "mobile",
-    "browser-desktop",
-    "browser-mobile",
-    "desktop-window"
+    "all"
   ],
   "disabledInPublish": true,
   "displayName": {
@@ -41,14 +31,8 @@
     ]
   },
   "keywords": [
-    "vscode",
-    "vscodelite",
-    "vscode lite",
     "VSCE",
     "VSCE主题",
-    "light",
-    "dark",
-    "emptylight",
-    "emptylight370"
+    "VSCE theme"
   ]
 }
