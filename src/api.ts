@@ -1,10 +1,12 @@
 import { fetchPost, fetchSyncPost } from 'siyuan';
 
+export async function _request(url: string, data: any) {
+    const res = await fetchSyncPost(url, data);
+    return res.code === 0 ? res.data : null;
+}
+
 export async function _getFile(path: string) {
-    return await fetchSyncPost(path).then((data) => {
-        if (data.code !== 0) return data.msg as string;
-        return data.data as string;
-    });
+    return await _request('/api/file/getFile', path);
 }
 
 /**
@@ -22,17 +24,7 @@ export async function _getFile(path: string) {
  * }
  */
 export async function getBlockAttrs(block: string): Promise<Record<string, string>> {
-    return await fetchSyncPost('/api/block/getBlockAttrs', {
-        id: block,
-    })
-        .then((data) => {
-            console.log('getBlockAttrs data:', data);
-            return (data?.data || {}) as Record<string, string>;
-        })
-        .catch((e) => {
-            console.error('getBlockAttrs error:', e);
-            return {};
-        });
+    return await _request('/api/block/getBlockAttrs', { id: block });
 }
 
 /**
@@ -42,10 +34,5 @@ export async function getBlockAttrs(block: string): Promise<Record<string, strin
  * @returns 操作成功返回 true，失败返回错误信息字符串
  */
 export async function setBlockAttrs(block: string, attrs: Record<string, string>): Promise<void> {
-    try {
-        fetchPost('/api/block/setBlockAttrs', { id: block, attrs: attrs });
-    } catch (error) {
-        console.error('setBlockAttrs error:', error);
-    }
-    return;
+    return await _request('/api/block/setBlockAttrs', { id: block, attrs: attrs });
 }
