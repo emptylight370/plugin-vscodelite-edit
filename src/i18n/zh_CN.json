@@ -15,10 +15,17 @@
   "menuLabel": "VSCode Lite Edit",
   "getFileError": "读取文件错误",
   "addAVNoAddEntry": "隐藏添加条目按钮",
+  "removeAVNoAddEntry": "显示添加条目按钮",
   "addAVNoAddView": "隐藏添加视图按钮",
+  "removeAVNoAddView": "显示添加视图按钮",
   "addTableMinWidth": "最小化表格列宽",
+  "removeTableMinWidth": "取消最小化表格列宽",
   "addTableNoThead": "去除主题表头外观",
+  "removeTableNoThead": "恢复主题表头外观",
   "addTableHideThead": "隐藏表头",
+  "removeTableHideThead": "显示表头",
   "addNoTagStyle": "禁用主题标签外观",
-  "addMarkHide": "标记挖空"
+  "removeNoTagStyle": "启用主题标签外观",
+  "addMarkHide": "标记挖空",
+  "removeMarkHide": "取消标记挖空"
 }

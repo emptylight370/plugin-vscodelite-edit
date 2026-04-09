@@ -15,10 +15,17 @@
   "menuLabel": "VSCode Lite Edit",
   "getFileError": "Read file error",
   "addAVNoAddEntry": "Hide add entry button",
+  "removeAVNoAddEntry": "Remove add entry button",
   "addAVNoAddView": "Hide add view button",
+  "removeAVNoAddView": "Remove add view button",
   "addTableMinWidth": "Minimize the width of table column",
+  "removeTableMinWidth": "Remove the minimized width of table column",
   "addTableNoThead": "Remove theme style of thead",
+  "removeTableNoThead": "Recover theme style of thead",
   "addTableHideThead": "Hide thead",
+  "removeTableHideThead": "Recover thead",
   "addNoTagStyle": "Disable theme tag style",
-  "addMarkHide": "Mark Cloze"
+  "removeNoTagStyle": "Enable theme tag style",
+  "addMarkHide": "Mark Cloze",
+  "removeMarkHide": "Remove Mark Cloze"
 }

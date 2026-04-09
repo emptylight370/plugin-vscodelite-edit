@@ -32,18 +32,19 @@ import { IMenu, IMenuBaseDetail } from 'siyuan/types';
 import './index.scss';
 import { IClickBlockIconEventDetail } from './types/types';
 import { isUsingVSCE } from './utils';
+import { getBlockAttrs, setBlockAttrs } from './api';
 
-export default class PluginSample extends Plugin {
-    private isMobile: boolean;
+export default class PluginVSCE extends Plugin {
+    // private isMobile: boolean;
     onload() {
-        const frontEnd = getFrontend();
-        const backEnd = getBackend();
+        // const frontEnd = getFrontend();
+        // const backEnd = getBackend();
         // 在前端和后端都是移动端时认定为移动端
-        this.isMobile =
-            (frontEnd === 'mobile' || frontEnd === 'browser-mobile') &&
-            (backEnd === 'android' || backEnd === 'ios' || backEnd === 'harmony');
+        // this.isMobile =
+        //     (frontEnd === 'mobile' || frontEnd === 'browser-mobile') &&
+        //     (backEnd === 'android' || backEnd === 'ios' || backEnd === 'harmony');
 
-        if (isUsingVSCE) {
+        if (isUsingVSCE()) {
             this.eventBus.on('click-blockicon', this.handleBlockSelect.bind(this));
             console.log(this.i18n.initWithVSCE);
         } else {
@@ -105,41 +106,131 @@ export default class PluginSample extends Plugin {
      */
     private selectSingleBlock(blockElement: HTMLElement) {
         const submenu: IMenu[] = [];
+        const blockId = blockElement.dataset.nodeId;
+        if (!blockId) {
+            console.warn('VSCE: 无法获取块 ID');
+            return submenu;
+        }
+        const attrs = blockElement.getAttribute('custom-vsce')?.split(' ') ?? [];
+
         // 数据库
         if (blockElement.dataset.type === 'NodeAttributeView') {
-            submenu.push({
-                label: this.i18n.addAVNoAddEntry,
-                click: () => {},
-            });
-            submenu.push({
-                label: this.i18n.addAVNoAddView,
-                click: () => {},
-            });
+            if (!attrs.includes('av-no-add-entry'))
+                submenu.push({
+                    label: this.i18n.addAVNoAddEntry,
+                    click: () => this.addBlockAttr(blockId, 'av-no-add-entry'),
+                });
+            else
+                submenu.push({
+                    label: this.i18n.removeAVNoAddEntry,
+                    click: () => this.removeBlockAttr(blockId, 'av-no-add-entry'),
+                });
+            if (!attrs.includes('av-no-add-view'))
+                submenu.push({
+                    label: this.i18n.addAVNoAddView,
+                    click: () => this.addBlockAttr(blockId, 'av-no-add-view'),
+                });
+            else
+                submenu.push({
+                    label: this.i18n.removeAVNoAddView,
+                    click: () => this.removeBlockAttr(blockId, 'av-no-add-view'),
+                });
         }
         // 表格
         else if (blockElement.dataset.type === 'NodeTable') {
-            submenu.push({
-                label: this.i18n.addTableMinWidth,
-                click: () => {},
-            });
-            submenu.push({
-                label: this.i18n.addTableNoThead,
-                click: () => {},
-            });
-            submenu.push({
-                label: this.i18n.addTableHideThead,
-                click: () => {},
-            });
-        } else if (blockElement.dataset.type === 'NodeParagraph' || blockElement.dataset.docType === 'NodeDocument') {
-            submenu.push({
-                label: this.i18n.addNoTagStyle,
-                click: () => {},
-            });
-            submenu.push({
-                label: this.i18n.addMarkHide,
-                click: () => {},
-            });
+            if (!attrs.includes('table-min'))
+                submenu.push({
+                    label: this.i18n.addTableMinWidth,
+                    click: () => this.addBlockAttr(blockId, 'table-min'),
+                });
+            else
+                submenu.push({
+                    label: this.i18n.removeTableMinWidth,
+                    click: () => this.removeBlockAttr(blockId, 'table-min'),
+                });
+            if (!attrs.includes('no-thead'))
+                submenu.push({
+                    label: this.i18n.addTableNoThead,
+                    click: () => this.addBlockAttr(blockId, 'no-thead'),
+                });
+            else
+                submenu.push({
+                    label: this.i18n.removeTableNoThead,
+                    click: () => this.removeBlockAttr(blockId, 'no-thead'),
+                });
+            if (!attrs.includes('hide-thead'))
+                submenu.push({
+                    label: this.i18n.addTableHideThead,
+                    click: () => this.addBlockAttr(blockId, 'hide-thead'),
+                });
+            else
+                submenu.push({
+                    label: this.i18n.removeTableHideThead,
+                    click: () => this.removeBlockAttr(blockId, 'hide-thead'),
+                });
+        }
+        // 段落和文档
+        else if (blockElement.dataset.type === 'NodeParagraph' || blockElement.dataset.docType === 'NodeDocument') {
+            if (!attrs.includes('no-tag'))
+                submenu.push({
+                    label: this.i18n.addNoTagStyle,
+                    click: () => this.addBlockAttr(blockId, 'no-tag'),
+                });
+            else
+                submenu.push({
+                    label: this.i18n.removeNoTagStyle,
+                    click: () => this.removeBlockAttr(blockId, 'no-tag'),
+                });
+            if (!attrs.includes('mark-hide'))
+                submenu.push({
+                    label: this.i18n.addMarkHide,
+                    click: () => this.addBlockAttr(blockId, 'mark-hide'),
+                });
+            else
+                submenu.push({
+                    label: this.i18n.removeMarkHide,
+                    click: () => this.removeBlockAttr(blockId, 'mark-hide'),
+                });
         }
         return submenu;
+    }
+
+    /**
+     * 添加或更新块属性
+     * @param blockId 块ID
+     * @param value 属性值
+     */
+    private async addBlockAttr(blockId: string, value: string) {
+        try {
+            const attrs = await getBlockAttrs(blockId);
+            console.log('attrs', attrs);
+            const existing = attrs?.['custom-vsce'] || '';
+            const vsceArr = existing ? existing.split(' ').filter((s) => s) : [];
+            if (!vsceArr.includes(value)) {
+                vsceArr.push(value);
+                await setBlockAttrs(blockId, { 'custom-vsce': vsceArr.join(' ') });
+            }
+        } catch (error) {
+            console.error('VSCE: 添加自定义属性失败', error);
+        }
+    }
+
+    /**
+     * 删除块属性
+     * @param blockId 块ID
+     * @param value 要删除的属性值
+     */
+    private async removeBlockAttr(blockId: string, value: string) {
+        try {
+            const attrs = await getBlockAttrs(blockId);
+            const existing = attrs?.['custom-vsce'] || '';
+            const vsceArr = existing ? existing.split(' ').filter((s) => s) : [];
+            if (vsceArr.includes(value)) {
+                vsceArr.splice(vsceArr.indexOf(value), 1);
+                await setBlockAttrs(blockId, { 'custom-vsce': vsceArr.join(' ') });
+            }
+        } catch (error) {
+            console.error('VSCE: 删除自定义属性失败', error);
+        }
     }
 }
