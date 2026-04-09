@@ -31,7 +31,7 @@ export async function getBlockAttrs(block: string): Promise<Record<string, strin
  * 设置块的属性
  * @param block - 块 ID
  * @param attrs - 要设置的属性对象，键值对形式
- * @returns 操作成功返回 true，失败返回错误信息字符串
+ * @returns null
  */
 export async function setBlockAttrs(block: string, attrs: Record<string, string>): Promise<void> {
     return await _request('/api/block/setBlockAttrs', { id: block, attrs: attrs });
