@@ -265,5 +265,7 @@ index.js
 /i18n
 scripts/*
 mise.local.toml
+mise.local.lock
+.mise/prepare-state.toml
 lefthook-local.yml
 .lefthook-local/**/*
