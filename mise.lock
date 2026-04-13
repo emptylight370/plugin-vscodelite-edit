@@ -37,6 +37,7 @@ provenance = "github-attestations"
 [tools.lefthook."platforms.windows-x64"]
 checksum = "sha256:bf14d028984d24a72887f4f73d8899f5879c11786f4ba79a81c676fb3cefce1e"
 url = "https://github.com/evilmartians/lefthook/releases/download/v2.1.5/lefthook_2.1.5_Windows_x86_64.gz"
+provenance = "github-attestations"
 
 [[tools.node]]
 version = "24.14.1"
@@ -70,9 +71,9 @@ url = "https://nodejs.org/dist/v24.14.1/node-v24.14.1-darwin-x64.tar.gz"
 checksum = "sha256:6e50ce5498c0cebc20fd39ab3ff5df836ed2f8a31aa093cecad8497cff126d70"
 url = "https://nodejs.org/dist/v24.14.1/node-v24.14.1-win-x64.zip"
 
-[[tools."npm:conventional-changelog-cli"]]
-version = "5.0.0"
-backend = "npm:conventional-changelog-cli"
+[[tools."npm:conventional-changelog"]]
+version = "7.2.0"
+backend = "npm:conventional-changelog"
 
 [[tools.pnpm]]
 version = "10.33.0"
