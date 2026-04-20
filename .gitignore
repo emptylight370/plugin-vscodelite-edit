@@ -266,6 +266,6 @@ index.js
 scripts/*
 mise.local.toml
 mise.local.lock
-.mise/prepare-state.toml
+.mise/deps-state.toml
 lefthook-local.yml
 .lefthook-local/**/*
