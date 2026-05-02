@@ -1,0 +1,20 @@
+{
+  "tabWidth": 2,
+  "printWidth": 120,
+  "bracketSameLine": true,
+  "singleQuote": true,
+  "overrides": [
+    {
+      "files": ["*.scss", "*.css"],
+      "options": {
+        "tabWidth": 4
+      }
+    },
+    {
+      "files": ["*.ts", "*.js", "*.mjs"],
+      "options": {
+        "tabWidth": 4
+      }
+    }
+  ]
+}
