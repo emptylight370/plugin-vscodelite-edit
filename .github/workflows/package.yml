@@ -25,7 +25,7 @@ jobs:
       - uses: jdx/mise-action@v4
 
       - name: Install deps
-        run: pnpm i
+        run: pnpm install
 
       - name: Get current version
         uses: emptylight370/jq-action@v1
@@ -40,7 +40,7 @@ jobs:
       - name: Generate release log
         run: |
           conventional-changelog -o release.md -n changelog.json -k plugin.json -c plugin.json
-          npx prettier -w release.md
+          prettier -w release.md
 
       - name: Release
         uses: softprops/action-gh-release@v3

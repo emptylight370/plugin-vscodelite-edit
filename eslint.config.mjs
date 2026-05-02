@@ -1,39 +1,19 @@
-import antfu from '@antfu/eslint-config'
-import perfectionist from 'eslint-plugin-perfectionist'
-import i18nPlugin from './src/utils/eslint/i18n-validate-keys.mjs'
+import antfu from '@antfu/eslint-config';
+import perfectionist from 'eslint-plugin-perfectionist';
 
 export default antfu(
   {
     type: 'lib',
     stylistic: {
-      indent: 2, // 4, or 'tab'
-      quotes: 'single', // or 'double'
+      indent: 2,
+      quotes: 'single',
     },
-
     vue: true,
     typescript: true,
-
     formatters: true,
+    ignores: ['dist', 'node_modules'],
+  },
 
-    ignores: [
-      'dist',
-      'node_modules',
-    ],
-  },
-  {
-    files: [
-      'src/**/*.vue',
-    ],
-    rules: {
-    },
-  },
-  {
-    files: [
-      'src/**/*.ts',
-    ],
-    rules: {
-    },
-  },
   {
     rules: {
       'antfu/top-level-function': 'off',
@@ -125,4 +105,5 @@ export default antfu(
       }],
     },
   },
-)
+  perfectionist.configs['recommended-natural'],
+);

@@ -13,7 +13,7 @@ try {
 }
 const { version } = PluginInfo;
 
-export default class PluginSample extends Plugin {
+export default class PluginVSCE extends Plugin {
     // Run as mobile
     public isMobile: boolean;
     // Run in browser

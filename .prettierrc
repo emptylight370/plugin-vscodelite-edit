@@ -12,6 +12,7 @@
     },
     {
       "files": ["*.ts", "*.js", "*.mjs"],
+      "excludeFiles": ["vite.config.ts"],
       "options": {
         "tabWidth": 4
       }
