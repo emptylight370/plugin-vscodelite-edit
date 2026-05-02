@@ -3,14 +3,14 @@
   "author": "Emptylight",
   "url": "https://github.com/emptylight370/plugin-vscodelite-edit",
   "version": "0.0.1",
-  "minAppVersion": "3.3.0",
+  "minAppVersion": "3.4.1",
   "backends": [
     "all"
   ],
   "frontends": [
     "all"
   ],
-  "disabledInPublish": true,
+  "disabledInPublish": false,
   "displayName": {
     "default": "VSCode Lite Edit"
   },
