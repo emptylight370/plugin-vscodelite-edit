@@ -8,6 +8,6 @@
 
 ## Plugin introduction
 
-This plugin is developed for SiYuan Note's theme [VSCode Lite Edit](https://github.com/emptylight370/siyuan-vscode-lite), only usable with the theme installed.
+This plugin is developed for SiYuan Note's theme [VSCode Lite Edit](https://github.com/emptylight370/siyuan-vscodelite-edit), only usable with the theme installed.
 
 This plugin doesn't provide any standlone features, all of them are depend on the theme. And the main feature of the theme won't be moved to plugin.
