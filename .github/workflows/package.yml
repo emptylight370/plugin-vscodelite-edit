@@ -40,13 +40,14 @@ jobs:
       - name: Generate release log
         run: |
           conventional-changelog -o release.md -n changelog.json -k plugin.json -c plugin.json
+          git cliff -u -o release.md -t ${{ steps.version.outputs.result }}
           prettier -w release.md
 
       - name: Release
         uses: softprops/action-gh-release@v3
         with:
           files: package.zip
-          name: Release ${{ steps.version.outputs.value }}
-          tag_name: ${{ steps.version.outputs.value }}
+          name: Release ${{ steps.version.outputs.result }}
+          tag_name: ${{ steps.version.outputs.result }}
           make_latest: true
           body_path: release.md

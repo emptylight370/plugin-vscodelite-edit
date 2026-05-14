@@ -1,7 +1,7 @@
 [tools]
+git-cliff = "latest"
 lefthook = "latest"
 node = "24"
-"npm:conventional-changelog" = "latest"
 pnpm = "latest"
 prettier = "latest"
 
@@ -11,11 +11,3 @@ prettier = "latest"
 description = "Install lefthook hooks"
 run = "lefthook install"
 sources = ["lefthook.yml"]
-
-[tasks.changelog]
-description = "Generate changelog via git history"
-run = [
-  "conventional-changelog -i whatschange.md -s -n changelog.json -k plugin.json -c plugin.json",
-  "npx prettier -w whatschange.md",
-  "git add whatschange.md",
-]
