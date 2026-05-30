@@ -11,3 +11,6 @@ prettier = "latest"
 description = "Install lefthook hooks"
 run = "lefthook install"
 sources = ["lefthook.yml"]
+
+[env]
+_.file = [".env"]
